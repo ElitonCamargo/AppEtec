@@ -1,17 +1,98 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Filmes
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list>
+
+    <ion-item-sliding>
+
+      <ion-item>
+
+        <ion-thumbnail slot="start">
+          <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg">
+        </ion-thumbnail>
+
+        <ion-label class="ion-text-wrap">
+          <div>
+            <p>Soul: Uma Aventura com Alma (2020)</p>
+            <p>25/12/2020 - 1h 40m</p>
+            <ion-badge color="light">Família</ion-badge>
+            <ion-badge color="light">Animação</ion-badge>
+            <ion-badge color="light">Comédia</ion-badge>
+            <ion-badge color="light">Drama</ion-badge>
+            <ion-badge color="light">Música</ion-badge>
+            <ion-badge color="light">Fantasia</ion-badge>
+          </div>
+        </ion-label>
+
+        <ion-chip outline="" color="success">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">83%</ion-label>
+        </ion-chip>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+
+        <ion-item-option color="light">
+          <ion-icon name="star-outline" color="warning"></ion-icon>
+        </ion-item-option>
+
+        <ion-item-option color="light">
+          <ion-icon name="trash-outline" color="danger"></ion-icon>
+        </ion-item-option>
+
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+    <ion-item-sliding>
+
+      <ion-item>
+
+        <ion-thumbnail slot="start">
+          <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg">
+        </ion-thumbnail>
+
+        <ion-label class="ion-text-wrap">
+          <div>
+            <p>Soul: Uma Aventura com Alma (2020)</p>
+            <p>25/12/2020 - 1h 40m</p>
+            <ion-badge color="light">Família</ion-badge>
+            <ion-badge color="light">Animação</ion-badge>
+            <ion-badge color="light">Comédia</ion-badge>
+            <ion-badge color="light">Drama</ion-badge>
+            <ion-badge color="light">Música</ion-badge>
+            <ion-badge color="light">Fantasia</ion-badge>
+          </div>
+        </ion-label>
+
+        <ion-chip outline="" color="success">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">83%</ion-label>
+        </ion-chip>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+
+        <ion-item-option color="light">
+          <ion-icon name="star-outline" color="warning"></ion-icon>
+        </ion-item-option>
+
+        <ion-item-option color="light">
+          <ion-icon name="trash-outline" color="danger"></ion-icon>
+        </ion-item-option>
+
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+
+  </ion-list>
+
 </ion-content>
