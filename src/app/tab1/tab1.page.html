@@ -1,42 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Filmes
+      {{nomeTab}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
+  <ion-toolbar>
+    <ion-searchbar placeholder="Buscar" (ionChange)="buscar($event)"></ion-searchbar>
+  </ion-toolbar>
+
   <ion-list>
 
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let filme of listaDeFilmes">
 
       <ion-item>
 
         <ion-thumbnail slot="start">
-          <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg">
+          <img [src]="filme.imagem">
         </ion-thumbnail>
-
         <ion-label class="ion-text-wrap">
           <div>
-            <p>Soul: Uma Aventura com Alma (2020)</p>
-            <p>25/12/2020 - 1h 40m</p>
-            <ion-badge color="light">Família</ion-badge>
-            <ion-badge color="light">Animação</ion-badge>
-            <ion-badge color="light">Comédia</ion-badge>
+            <p>{{filme.nome}}</p>
+            <p>{{filme.lancamento}} - {{filme.duracao}}</p>
+            <ion-badge color="light" *ngFor="let genero of filme.generos">
+              {{genero}}
+            </ion-badge>
           </div>
         </ion-label>
 
         <ion-chip outline="" color="success">
-          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">83%</ion-label>
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">{{filme.avaliacao}}</ion-label>
         </ion-chip>
 
       </ion-item>
 
       <ion-item-options side="end">
 
-        <ion-item-option color="light">
+        <ion-item-option color="light" (click)="presentAlertCheckbox()">
           <ion-icon name="star-outline" color="warning"></ion-icon>
         </ion-item-option>
 
@@ -47,45 +50,6 @@
       </ion-item-options>
 
     </ion-item-sliding>
-
-    <ion-item-sliding>
-
-      <ion-item>
-
-        <ion-thumbnail slot="start">
-          <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg">
-        </ion-thumbnail>
-
-        <ion-label class="ion-text-wrap">
-          <div>
-            <p>Soul: Uma Aventura com Alma (2020)</p>
-            <p>25/12/2020 - 1h 40m</p>
-            <ion-badge color="light">Drama</ion-badge>
-            <ion-badge color="light">Música</ion-badge>
-            <ion-badge color="light">Fantasia</ion-badge>
-          </div>
-        </ion-label>
-
-        <ion-chip outline="" color="success">
-          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">83%</ion-label>
-        </ion-chip>
-
-      </ion-item>
-
-      <ion-item-options side="end">
-
-        <ion-item-option color="light">
-          <ion-icon name="star-outline" color="warning"></ion-icon>
-        </ion-item-option>
-
-        <ion-item-option color="light">
-          <ion-icon name="trash-outline" color="danger"></ion-icon>
-        </ion-item-option>
-
-      </ion-item-options>
-
-    </ion-item-sliding>
-
 
   </ion-list>
 
