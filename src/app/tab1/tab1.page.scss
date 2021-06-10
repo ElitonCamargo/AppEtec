@@ -2,10 +2,13 @@ ion-item{
   --padding-start: 10px;
   --inner-padding-end:10px;
   ion-thumbnail{
-    height: auto;
+    //height: auto;
     margin-inline-end: 5px;
-    margin-top: 2px;
+    margin-top: 0px;
     margin-bottom: 0px;
+    img{
+      height: auto;
+    }
   }
   h1{
     font-weight: bold;
@@ -17,18 +20,24 @@ ion-item{
   p+p{
     color: #8a8a8a;
   }
+  ion-badge{
+    font-weight: 300;
+    font-size: 0.6rem;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+
+  }
   ion-chip{
     background: #000000ba;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     border: solid 2px;
-    padding: auto ;
+    padding-top: 0px;
   }
-  ion-badge{
-    font-weight: 300;
-    font-size: 0.6rem;
-    margin-inline-start: 2px;
-    margin-inline-end: 2px;
+  ion-label{
+    margin: 1px 0px 1px;
+    padding-top: 10px;
   }
+
 }
