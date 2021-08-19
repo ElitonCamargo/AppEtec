@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { IFilme } from '../models/IFilme.model';
 
 
 @Component({
@@ -12,22 +13,24 @@ export class Tab1Page {
   public nomeTab = 'Filmes favoritos';
   public buscarTexto: string;
 
-  public listaDeFilmes = [
+  public listaDeFilmes: IFilme[] = [
     {
-      imagem : 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg',
+      imagem: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg',
       nome: 'Soul: Uma Aventura com Alma (2020)',
       lancamento: '25/12/2020',
       duracao: '1h 40m',
       generos: ['Animação', 'Comédia', 'Família', 'Aventura'],
-      avaliacao: '83%'
+      avaliacao: 83,
+      page: '/soul'
     },
     {
-      imagem : 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Am1ipOQiOMrH55tCCT2ObNiF1rW.jpg',
+      imagem: 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Am1ipOQiOMrH55tCCT2ObNiF1rW.jpg',
       nome: 'Monster Hunter (2020)',
       lancamento: '25/02/2021',
       duracao: '1h 43m',
       generos: ['Ação', 'Fantasia', 'Aventura','Ação', 'Fantasia', 'Aventura'],
-      avaliacao: '70%'
+      avaliacao: 70,
+      page: '/monster'
     }
   ];
 

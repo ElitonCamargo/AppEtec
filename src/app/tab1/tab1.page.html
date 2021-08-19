@@ -13,14 +13,9 @@
   </ion-toolbar>
 
   <ion-list>
-
-    <ion-chip color="warning">
-      <ion-label><ion-icon name="star"></ion-icon></ion-label>
-    </ion-chip>
-
     <ion-item-sliding *ngFor="let filme of listaDeFilmes">
 
-      <ion-item>
+      <ion-item [routerLink]="filme.page">
 
         <ion-thumbnail slot="start">
           <img [src]="filme.imagem">
