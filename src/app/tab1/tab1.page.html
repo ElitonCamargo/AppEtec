@@ -14,6 +14,10 @@
 
   <ion-list>
 
+    <ion-chip color="warning">
+      <ion-label><ion-icon name="star"></ion-icon></ion-label>
+    </ion-chip>
+
     <ion-item-sliding *ngFor="let filme of listaDeFilmes">
 
       <ion-item>
@@ -39,7 +43,7 @@
 
       <ion-item-options side="end">
 
-        <ion-item-option color="light" (click)="presentAlertCheckbox()">
+        <ion-item-option color="light" (click)="presentAlertPrompt()">
           <ion-icon name="star-outline" color="warning"></ion-icon>
         </ion-item-option>
 

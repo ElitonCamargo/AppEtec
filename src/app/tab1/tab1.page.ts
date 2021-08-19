@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -34,82 +35,20 @@ export class Tab1Page {
     public alertController: AlertController
   ) {}
 
-  async presentAlertCheckbox() {
+  async presentAlertPrompt() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Checkbox',
-      inputs: [
-        {
-          name: 'checkbox1',
-          type: 'checkbox',
-          label: 'Checkbox 1',
-          value: 'value1',
-          handler: () => {
-            console.log('Checkbox 1 selected');
-          },
-          checked: true
-        },
-
-        {
-          name: 'checkbox2',
-          type: 'checkbox',
-          label: 'Checkbox 2',
-          value: 'value2',
-          handler: () => {
-            console.log('Checkbox 2 selected');
-          }
-        },
-
-        {
-          name: 'checkbox3',
-          type: 'checkbox',
-          label: 'Checkbox 3',
-          value: 'value3',
-          handler: () => {
-            console.log('Checkbox 3 selected');
-          }
-        },
-
-        {
-          name: 'checkbox4',
-          type: 'checkbox',
-          label: 'Checkbox 4',
-          value: 'value4',
-          handler: () => {
-            console.log('Checkbox 4 selected');
-          }
-        },
-
-        {
-          name: 'checkbox5',
-          type: 'checkbox',
-          label: 'Checkbox 5',
-          value: 'value5',
-          handler: () => {
-            console.log('Checkbox 5 selected');
-          }
-        },
-
-        {
-          name: 'checkbox6',
-          type: 'checkbox',
-          label: 'Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6',
-          value: 'value6',
-          handler: () => {
-            console.log('Checkbox 6 selected');
-          }
-        }
-      ],
+      cssClass: 'alertDanger',
+      header: 'Teset',
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
+          text: '1',
+          cssClass: 'alertDanger',
           handler: () => {
             console.log('Confirm Cancel');
           }
-        }, {
-          text: 'Ok',
+        },
+        {
+          text: '2',
           handler: () => {
             console.log('Confirm Ok');
           }
@@ -119,6 +58,7 @@ export class Tab1Page {
 
     await alert.present();
   }
+
 
   buscar(element: any): void{
     const textBusca = element.detail.value;
