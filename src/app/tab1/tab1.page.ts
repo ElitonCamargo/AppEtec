@@ -44,15 +44,33 @@ export class Tab1Page {
           text: '1',
           cssClass: 'alertDanger',
           handler: () => {
-            console.log('Confirm Cancel');
+            console.log('1');
           }
         },
         {
           text: '2',
           handler: () => {
-            console.log('Confirm Ok');
+            console.log('2');
           }
-        }
+        },
+        {
+          text: '3',
+          handler: () => {
+            console.log('3');
+          }
+        },
+        {
+          text: '4',
+          handler: () => {
+            console.log('4');
+          }
+        },
+        {
+          text: '5',
+          handler: () => {
+            console.log('5');
+          }
+        },
       ]
     });
 
