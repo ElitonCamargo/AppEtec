@@ -39,12 +39,12 @@
 
       <ion-item-options side="end">
 
-        <ion-item-option color="light" (click)="presentAlertCheckbox()">
+        <ion-item-option color="light" (click)="avaliacao()">
           <ion-icon name="star-outline" color="warning"></ion-icon>
         </ion-item-option>
 
-        <ion-item-option color="light">
-          <ion-icon name="trash-outline" color="danger"></ion-icon>
+        <ion-item-option color="light" (click)="curtir(filme.nome)">
+          <ion-icon name="thumbs-up-outline" color="warning"></ion-icon>
         </ion-item-option>
 
       </ion-item-options>

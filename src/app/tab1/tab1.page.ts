@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -31,72 +32,77 @@ export class Tab1Page {
   ];
 
   constructor(
-    public alertController: AlertController
+    public alertCont: AlertController,
+    public toastController: ToastController,
   ) {}
 
-  async presentAlertCheckbox() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Checkbox',
+  async curtir(filme: string) {
+    const alert = await this.alertCont.create({
+      header: 'Confirmação!',
+      message: 'Tem ceteza desta ação?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.link(filme);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async avaliacao() {
+    const alert = await this.alertCont.create({
+      header: 'Nota',
       inputs: [
         {
           name: 'checkbox1',
-          type: 'checkbox',
-          label: 'Checkbox 1',
-          value: 'value1',
+          type: 'radio',
+          label: '1',
+          value: '1',
           handler: () => {
             console.log('Checkbox 1 selected');
-          },
-          checked: true
+          }
         },
-
         {
           name: 'checkbox2',
-          type: 'checkbox',
-          label: 'Checkbox 2',
-          value: 'value2',
+          label: '2',
+          value: '2',
           handler: () => {
             console.log('Checkbox 2 selected');
           }
         },
-
         {
           name: 'checkbox3',
-          type: 'checkbox',
-          label: 'Checkbox 3',
-          value: 'value3',
+          label: '3',
+          value: '3',
           handler: () => {
             console.log('Checkbox 3 selected');
           }
         },
-
         {
           name: 'checkbox4',
-          type: 'checkbox',
-          label: 'Checkbox 4',
-          value: 'value4',
+          label: '4',
+          value: '4',
           handler: () => {
             console.log('Checkbox 4 selected');
           }
         },
-
         {
           name: 'checkbox5',
-          type: 'checkbox',
-          label: 'Checkbox 5',
-          value: 'value5',
+          label: '5',
+          value: '5',
           handler: () => {
             console.log('Checkbox 5 selected');
-          }
-        },
-
-        {
-          name: 'checkbox6',
-          type: 'checkbox',
-          label: 'Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6 Checkbox 6',
-          value: 'value6',
-          handler: () => {
-            console.log('Checkbox 6 selected');
           }
         }
       ],
@@ -118,6 +124,16 @@ export class Tab1Page {
     });
 
     await alert.present();
+  }
+
+
+  async link(filme: string){
+    const toast = await this.toastController.create({
+      header: `Link atribuido: ${filme}`,
+      duration: 3000,
+      position: 'middle'
+    });
+    toast.present();
   }
 
   buscar(element: any): void{
