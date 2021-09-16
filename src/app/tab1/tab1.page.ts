@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { GenerosService } from './../service/generos.service';
+import { IListaFilmes } from './../models/IListaFilmes.model';
+import { FilmeService } from './../service/filme.service';
+import { Component, OnInit} from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
@@ -7,34 +10,48 @@ import { ToastController } from '@ionic/angular';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 
   public nomeTab = 'Filmes favoritos';
   public buscarTexto: string;
 
-  public listaDeFilmes = [
-    {
-      imagem : 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/bzDAfXoqNAvWUe7uss2NE3BmRqy.jpg',
-      nome: 'Soul: Uma Aventura com Alma (2020)',
-      lancamento: '25/12/2020',
-      duracao: '1h 40m',
-      generos: ['Animação', 'Comédia', 'Família', 'Aventura'],
-      avaliacao: '83%'
-    },
-    {
-      imagem : 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/Am1ipOQiOMrH55tCCT2ObNiF1rW.jpg',
-      nome: 'Monster Hunter (2020)',
-      lancamento: '25/02/2021',
-      duracao: '1h 43m',
-      generos: ['Ação', 'Fantasia', 'Aventura','Ação', 'Fantasia', 'Aventura'],
-      avaliacao: '70%'
-    }
-  ];
+  public listaDeFilmes: IListaFilmes;
+  public generos: string[] = [];
 
   constructor(
     public alertCont: AlertController,
     public toastController: ToastController,
+    public filmeService: FilmeService,
+    public generosService: GenerosService
   ) {}
+
+  listarFilmes(){
+    this.filmeService.listarPopulares().subscribe(dados =>{this.listaDeFilmes = dados;});
+  }
+
+  listarGeneros(): void{
+    this.generosService.listar().subscribe(
+      listaGeneros => {listaGeneros.genres.forEach(cadaGenero =>{this.generos[cadaGenero.id] = cadaGenero.name;});}
+    );
+  }
+
+  buscar(element: any): void{
+    const textBusca: string = element.detail.value;
+    if(textBusca.length > 0){
+      this.filmeService.buscarPorNome(textBusca).subscribe(listFilme => {
+        this.listaDeFilmes = listFilme;
+      });
+    }
+    else{
+      this.listarFilmes();
+    }
+    console.log(this.generos);
+  }
+
+  ngOnInit(){
+    this.listarFilmes();
+    this.listarGeneros();
+  }
 
   async curtir(filme: string) {
     const alert = await this.alertCont.create({
@@ -135,10 +152,4 @@ export class Tab1Page {
     });
     toast.present();
   }
-
-  buscar(element: any): void{
-    const textBusca = element.detail.value;
-    console.log(textBusca);
-  }
-
 }

@@ -4,35 +4,34 @@
       {{nomeTab}}
     </ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-
   <ion-toolbar>
     <ion-searchbar placeholder="Buscar" (ionChange)="buscar($event)"></ion-searchbar>
   </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true">
   <ion-list>
 
-    <ion-item-sliding *ngFor="let filme of listaDeFilmes">
+    <ion-item-sliding *ngFor="let filme of listaDeFilmes.results">
 
       <ion-item>
 
         <ion-thumbnail slot="start">
-          <img [src]="filme.imagem">
+          <img *ngIf="filme.poster_path" src="https://image.tmdb.org/t/p/w500/{{filme.poster_path}}">
+          <ion-icon *ngIf="!filme.poster_path" name="videocam-off"></ion-icon>
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
           <div>
-            <p>{{filme.nome}}</p>
-            <p>{{filme.lancamento}} - {{filme.duracao}}</p>
-            <ion-badge color="light" *ngFor="let genero of filme.generos">
-              {{genero}}
+            <p>{{filme.title}}</p>
+            <p>{{filme.release_date | date: 'shortDate'}}</p>
+            <ion-badge color="light" *ngFor="let genero_id of filme.genre_ids">
+              {{generos[genero_id]}}
             </ion-badge>
           </div>
         </ion-label>
 
         <ion-chip outline="" color="success">
-          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">{{filme.avaliacao}}</ion-label>
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">{{filme.vote_average*10}}<sup>%</sup></ion-label>
         </ion-chip>
 
       </ion-item>
@@ -43,7 +42,7 @@
           <ion-icon name="star-outline" color="warning"></ion-icon>
         </ion-item-option>
 
-        <ion-item-option color="light" (click)="curtir(filme.nome)">
+        <ion-item-option color="light" (click)="curtir(filme.title)">
           <ion-icon name="thumbs-up-outline" color="warning"></ion-icon>
         </ion-item-option>
 
