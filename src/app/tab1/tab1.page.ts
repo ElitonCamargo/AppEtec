@@ -83,7 +83,8 @@ export class Tab1Page implements OnInit {
 
   public verDetalhes(filme: IFilme): void{
     this.dados.setDados('filme',filme);
-    this.rout.navigateByUrl('/detalhes');
+    const routa = `/detalhes/${filme.id}`;
+    this.rout.navigateByUrl(routa);
   }
 
   async avaliacao() {

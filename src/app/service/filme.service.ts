@@ -1,3 +1,4 @@
+import { IFilmeDetalhes } from './../models/IFilmeDetalhes.model';
 import { IListaFilmes } from './../models/IListaFilmes.model';
 import { ToastController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
@@ -35,6 +36,14 @@ export class FilmeService {
     const url = `${this.api}${recurso}?${this.key}&language=${this.language}&region=${this.region}&page=${page}&query=${filtro}`;
     console.log('URL:'+ url);
     return this.http.get<IListaFilmes>(url).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+    );
+  }
+
+  public buscarPorId(id: number): Observable<IFilmeDetalhes>{
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=034c5fdfe098d8cb374c2152cf44c2e7&language=pt-BR`;
+    return this.http.get<IFilmeDetalhes>(url).pipe(
       map(retorno => retorno),
       catchError(erro => this.exibirErro(erro))
     );

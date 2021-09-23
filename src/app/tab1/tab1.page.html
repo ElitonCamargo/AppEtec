@@ -15,7 +15,6 @@
     <ion-item-sliding *ngFor="let filme of listaDeFilmes">
 
       <ion-item (click)="verDetalhes(filme)" >
-
         <ion-thumbnail slot="start">
           <img *ngIf="filme.poster_path" src="https://image.tmdb.org/t/p/w500/{{filme.poster_path}}">
           <ion-icon *ngIf="!filme.poster_path" name="videocam-off"></ion-icon>
