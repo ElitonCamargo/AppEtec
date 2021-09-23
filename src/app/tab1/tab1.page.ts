@@ -1,9 +1,11 @@
+import { DadosService } from './../service/dados.service';
 import { GenerosService } from './../service/generos.service';
-import { IListaFilmes } from './../models/IListaFilmes.model';
 import { FilmeService } from './../service/filme.service';
 import { Component, OnInit} from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { IFilme } from '../models/IFilme.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -15,18 +17,20 @@ export class Tab1Page implements OnInit {
   public nomeTab = 'Filmes favoritos';
   public buscarTexto: string;
 
-  public listaDeFilmes: IListaFilmes;
+  public listaDeFilmes: IFilme[] = [];
   public generos: string[] = [];
 
   constructor(
     public alertCont: AlertController,
     public toastController: ToastController,
     public filmeService: FilmeService,
-    public generosService: GenerosService
+    public generosService: GenerosService,
+    public rout: Router,
+    public dados: DadosService
   ) {}
 
   listarFilmes(){
-    this.filmeService.listarPopulares().subscribe(dados =>{this.listaDeFilmes = dados;});
+    this.filmeService.listarPopulares().subscribe(dados =>{this.listaDeFilmes = dados.results;});
   }
 
   listarGeneros(): void{
@@ -39,13 +43,13 @@ export class Tab1Page implements OnInit {
     const textBusca: string = element.detail.value;
     if(textBusca.length > 0){
       this.filmeService.buscarPorNome(textBusca).subscribe(listFilme => {
-        this.listaDeFilmes = listFilme;
+        this.listaDeFilmes = listFilme.results;
       });
     }
     else{
       this.listarFilmes();
     }
-    console.log(this.generos);
+    console.log(this.listaDeFilmes);
   }
 
   ngOnInit(){
@@ -75,6 +79,11 @@ export class Tab1Page implements OnInit {
     });
 
     await alert.present();
+  }
+
+  public verDetalhes(filme: IFilme): void{
+    this.dados.setDados('filme',filme);
+    this.rout.navigateByUrl('/detalhes');
   }
 
   async avaliacao() {

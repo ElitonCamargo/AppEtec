@@ -12,9 +12,9 @@
 <ion-content [fullscreen]="true">
   <ion-list>
 
-    <ion-item-sliding *ngFor="let filme of listaDeFilmes.results">
+    <ion-item-sliding *ngFor="let filme of listaDeFilmes">
 
-      <ion-item>
+      <ion-item (click)="verDetalhes(filme)" >
 
         <ion-thumbnail slot="start">
           <img *ngIf="filme.poster_path" src="https://image.tmdb.org/t/p/w500/{{filme.poster_path}}">
