@@ -13,8 +13,9 @@ import { IFilmeDetalhes } from '../models/IFilmeDetalhes.model';
 export class DetalhesPage implements OnInit {
 
   public filme: IFilme;
-  public filmeTitulo: string;
   public id = 0;
+
+  public filmeDetalhes: IFilmeDetalhes = {};
 
 
   constructor(
@@ -27,8 +28,7 @@ export class DetalhesPage implements OnInit {
     this.filme = this.dados.getDados('filme');
     this.id = Number(this.activetRouter.snapshot.paramMap.get('id'));
     this.filmeService.buscarPorId(this.id).subscribe(result => {
-      this.filmeTitulo = result.title;
+      this.filmeDetalhes = result;
     });
   }
-
 }

@@ -1,12 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{filmeTitulo}}</ion-title>
+    <ion-title>{{filmeDetalhes.title}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
+  <ion-card>
+    <img src="https://image.tmdb.org/t/p/w500/{{filmeDetalhes.poster_path}}" />
+    <ion-card-header>
+      <ion-card-subtitle>Filme</ion-card-subtitle>
+      <ion-card-title>{{filmeDetalhes.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{filmeDetalhes.overview}}
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
