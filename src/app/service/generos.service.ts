@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { IGeneros } from './../models/IGeneros.model';
 import { ToastController } from '@ionic/angular';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -29,12 +30,24 @@ export class GenerosService {
     );
   }
 
-  private async exibirErro(erro: any) {
+ private async exibirErro(erro: any) {
     const toast = await this.toastController.create({
       header: 'Erro ao consultar a API!!!',
       position: 'middle',
       color: 'danger',
       message: 'Motivo: ' + erro.error.errors[0],
+      duration: 2000
+    });
+    toast.present();
+    return null;
+  }
+
+  private async exibirErro2(erro: any) {
+    const toast = await this.toastController.create({
+      header: 'Erro ao consultar a API!!!',
+      position: 'middle',
+      color: 'danger',
+      message: 'Motivo: ' + erro,
       duration: 2000
     });
     toast.present();
