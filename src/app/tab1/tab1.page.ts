@@ -49,7 +49,6 @@ export class Tab1Page implements OnInit {
     else{
       this.listarFilmes();
     }
-    console.log(this.listaDeFilmes);
   }
 
   ngOnInit(){
@@ -67,12 +66,11 @@ export class Tab1Page implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Sim',
           handler: () => {
-            this.link(filme);
+            this.link(`Link atribuido: ${filme}`);
           }
         }
       ]
@@ -87,64 +85,24 @@ export class Tab1Page implements OnInit {
     this.rout.navigateByUrl(routa);
   }
 
-  async avaliacao() {
+  async favoritar(filme: IFilme) {
     const alert = await this.alertCont.create({
-      header: 'Nota',
-      inputs: [
-        {
-          name: 'checkbox1',
-          type: 'radio',
-          label: '1',
-          value: '1',
-          handler: () => {
-            console.log('Checkbox 1 selected');
-          }
-        },
-        {
-          name: 'checkbox2',
-          label: '2',
-          value: '2',
-          handler: () => {
-            console.log('Checkbox 2 selected');
-          }
-        },
-        {
-          name: 'checkbox3',
-          label: '3',
-          value: '3',
-          handler: () => {
-            console.log('Checkbox 3 selected');
-          }
-        },
-        {
-          name: 'checkbox4',
-          label: '4',
-          value: '4',
-          handler: () => {
-            console.log('Checkbox 4 selected');
-          }
-        },
-        {
-          name: 'checkbox5',
-          label: '5',
-          value: '5',
-          handler: () => {
-            console.log('Checkbox 5 selected');
-          }
-        }
-      ],
+      header: 'Favoritar',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
           }
         }, {
           text: 'Ok',
           handler: () => {
-            console.log('Confirm Ok');
+            this.filmeService.favoritar(filme).subscribe(filmeCadastrado => {
+              if(filmeCadastrado.objectId){
+                this.link(`${filme.title} foi favoritado com sucesso!!!`);
+              }
+            });
           }
         }
       ]
@@ -154,9 +112,9 @@ export class Tab1Page implements OnInit {
   }
 
 
-  async link(filme: string){
+  async link(msg: string){
     const toast = await this.toastController.create({
-      header: `Link atribuido: ${filme}`,
+      header: msg,
       duration: 3000,
       position: 'middle'
     });

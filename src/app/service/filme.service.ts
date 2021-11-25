@@ -1,4 +1,3 @@
-import { IFilmesFavoritos } from '../models/IFilmesFavoritos.model';
 /* eslint-disable @typescript-eslint/naming-convention */
 import { IFilmeDetalhes } from './../models/IFilmeDetalhes.model';
 import { IListaFilmes } from './../models/IListaFilmes.model';
@@ -25,7 +24,6 @@ export class FilmeService {
 
   public listarPopulares(): Observable<IListaFilmes>{
     const url = 'https://api.themoviedb.org/3/movie/popular?api_key=034c5fdfe098d8cb374c2152cf44c2e7&language=pt-BR&page=1&region=BR';
-    console.log('URL:'+ url);
     return this.http.get<IListaFilmes>(url).pipe(
       map(retorno => retorno),
       catchError(erro => this.exibirErro(erro))
@@ -37,23 +35,39 @@ export class FilmeService {
   public buscarPorNome(filtro: string, page: string = '1'): Observable<IListaFilmes>{
     const recurso = '/search/movie';
     const url = `${this.api}${recurso}?${this.key}&language=${this.language}&region=${this.region}&page=${page}&query=${filtro}`;
-    console.log('URL:'+ url);
     return this.http.get<IListaFilmes>(url).pipe(
       map(retorno => retorno),
       catchError(erro => this.exibirErro(erro))
     );
   }
 
-  public buscarFavoritos(): Observable<IFilmesFavoritos>{
+  public buscarFavoritos(): Observable<IListaFilmes>{
     const url = 'https://parseapi.back4app.com/classes/Filme';
 
     const configApi = {
-      'X-Parse-Application-Id': 'sppUa0RnIdfZhrVFpC63cuF6WRLKIEQh3sGxwPFe',
-      'X-Parse-REST-API-Key': 'J7RXIr1LnPs5vRz49BIqsXCF5l8h8qGeyhUFNMc5'
+      'X-Parse-Application-Id': '4ETSbC61A032K0G25XdVCZuB8cSZ43fMbrkFNnSR',
+      'X-Parse-REST-API-Key': 'dyrrr9PEAiRnVGVuR3837WTRleojUuf54lhvEsYT'
     };
     const headers = new HttpHeaders(configApi);
 
-    return this.http.get<IFilmesFavoritos>(url,{headers}).pipe(
+    return this.http.get<IListaFilmes>(url,{headers}).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro2(erro))
+    );
+  }
+
+
+  public favoritar(filme: IFilme): Observable<IFilme>{
+    const url = 'https://parseapi.back4app.com/classes/Filme';
+    const configApi = {
+      'X-Parse-Application-Id': '4ETSbC61A032K0G25XdVCZuB8cSZ43fMbrkFNnSR',
+      'X-Parse-REST-API-Key': 'dyrrr9PEAiRnVGVuR3837WTRleojUuf54lhvEsYT',
+      'Content-Type': 'application/json'
+    };
+    filme.iD = filme.id;
+    delete filme.id;
+    const headers = new HttpHeaders(configApi);
+    return this.http.post<IFilme>(url, filme, {headers}).pipe(
       map(retorno => retorno),
       catchError(erro => this.exibirErro2(erro))
     );

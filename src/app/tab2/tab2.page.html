@@ -7,5 +7,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <button ion-button round (click)="listarFavoritos()" >Testando</button>
+  <ion-list>
+    <ion-item-sliding *ngFor="let filme of listaFilmes">
+
+      <ion-item (click)="verDetalhes()" >
+        <ion-thumbnail slot="start">
+          <img *ngIf="filme.poster_path" src="https://image.tmdb.org/t/p/w500/{{filme.poster_path}}">
+          <ion-icon *ngIf="!filme.poster_path" name="videocam-off"></ion-icon>
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <div>
+            <p>{{filme.title}}</p>
+            <p>{{filme.release_date | date: 'shortDate'}}</p>
+            <ion-badge color="light" *ngFor="let genero_id of filme.genre_ids">
+              {{generos[genero_id]}}
+            </ion-badge>
+          </div>
+        </ion-label>
+
+        <ion-chip outline="" color="success">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">{{filme.vote_average*10}}<sup>%</sup></ion-label>
+        </ion-chip>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+
+        <ion-item-option color="danger" (click)="remover(filme)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-item-option>
+
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
 </ion-content>

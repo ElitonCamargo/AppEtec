@@ -1,5 +1,4 @@
 import { FilmeService } from './../service/filme.service';
-import { IFilmesFavoritos } from '../models/IFilmesFavoritos.model';
 import { GenerosService } from './../service/generos.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -12,41 +11,34 @@ import { IFilme } from '../models/IFilme.model';
 })
 export class Tab2Page implements OnInit{
 
-  public filmesFavoritos: IFilmesFavoritos;
+  public listaFilmes: IFilme[];
+  public generos: string[] = [];
 
-  constructor(public filmeService: FilmeService) {}
+
+  constructor(
+    public filmeService: FilmeService,
+    public generosService: GenerosService
+  ) {}
 
   ngOnInit(){
-    this.buscarFavoritosApi();
+    this.buscarFilmesFavoritos();
+    this.listarGeneros();
   }
 
-  public buscarFavoritosApi(): void{
-    this.filmeService.buscarFavoritos().subscribe(listaFilmesFavoritos => {
-      this.filmesFavoritos = listaFilmesFavoritos;
+  public listarGeneros(): void{
+    this.generosService.listar().subscribe(
+      listaGeneros => {listaGeneros.genres.forEach(cadaGenero =>{this.generos[cadaGenero.id] = cadaGenero.name;});}
+    );
+  }
+
+  public buscarFilmesFavoritos(): void{
+    this.filmeService.buscarFavoritos().subscribe(filmesEncontrado =>{
+      this.listaFilmes = filmesEncontrado.results;
     });
   }
 
-  public listarFavoritos(): void{
-    this.filmesFavoritos.results.forEach(filme =>{console.log(filme.title);});
+  verDetalhes(): void{}
+  remover(filme: IFilme): void{
+
   }
-
-
-  // ngOnInit(){
-  //   this.testarApi();
-  // }
-
-  // testar(){
-  //   console.log(this.teste.results);
-  //   this.teste.results.forEach(values =>{console.log(values.nome);});
-  // }
-
-  // testarApi(): void{
-  //   this.generosService.testeApi().subscribe(
-  //     resposta => {
-  //       this.teste = resposta;
-  //       //listaGeneros.genres.forEach(cadaGenero =>{this.generos[cadaGenero.id] = cadaGenero.name;});
-  //     }
-  //   );
-  // }
-
 }
